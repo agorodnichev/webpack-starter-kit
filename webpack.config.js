@@ -2,6 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const nodeModulesPath = path.resolve(__dirname, 'node_modules');
+
+/**
+ * TODO:
+ *  1) Find a way to combine multiple HTML files in compile time with using CSS modules.
+ */
+
 module.exports = {
   mode: 'development',
   entry: {
@@ -19,16 +26,27 @@ module.exports = {
           {
             test: /\.tsx?$/,
             use: 'ts-loader',
-            exclude: /node_modules/,
+            exclude: [/node_modules/, nodeModulesPath],
           },
           {
             test: /\.(sa|sc|c)ss$/i,
-              use: [
-                MiniCssExtractPlugin.loader, 
-                "css-loader",
-                'postcss-loader',
-                "sass-loader",
-              ],
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
+                // // Uncomment below to use CSS Modules
+                // options: {
+                //   esModule: true,
+                //   modules: {
+                //     exportLocalsConvention: 'camelCaseOnly',
+                //     localIdentName: '[path][name]__[local]', // use '[hash:base64]' for production
+                //     namedExport: false,
+                //   }
+                // }
+              },
+              'postcss-loader',
+              "sass-loader",
+            ],
           },
           {
             test: /\.ejs$/i,
@@ -41,7 +59,7 @@ module.exports = {
       ],
   },
   resolve: {
-      extensions: ['.tsx', '.ts', '.js'],
+      extensions: ['.tsx', '.ts', '.js', '.scss', '.css'],
   },
   plugins: [
     new HtmlWebpackPlugin({

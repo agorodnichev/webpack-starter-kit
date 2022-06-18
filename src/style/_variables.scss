@@ -1,1 +1,19 @@
+// colors
 $base-color: #0163db;
+$grey-color: #aba9a9;
+
+// Breakpoints
+$small-devices-breakpoint: 600px;
+$medium-devices-breakpoint: 768px;
+$large-devices-breakpoint: 992px;
+$extra-large-devices-breakpoint: 1200px;
+
+// export expose scss/css variables to js
+:export {
+    baseColor: $base-color;
+    greyColor: $grey-color;
+    smallDevicesBreakpoint: $small-devices-breakpoint;
+    mediumDevicesBreakpoint: $medium-devices-breakpoint;
+    largeDevicesBreakpoint: $large-devices-breakpoint;
+    extraLargeDevicesBreakpoint: $extra-large-devices-breakpoint;
+}

@@ -1,4 +1,9 @@
 @use '../components/header/header';
+@use '../components/footer/footer';
+
+html, body {
+    height: 100%;
+}
 body {
     margin: 0;
 }
